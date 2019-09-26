@@ -12,18 +12,23 @@ eureka:
       defaultZone: http://server1:8000/eureka/
 
 zuul:
+  #  prefix可有可无，网关访问的前缀
   prefix: /openpj
   routes:
     # 优惠券模板微服务路由配置定义
     template:
       path: /coupon-template/**
       serviceId: eureka-client-coupon-template
-      #      跳过前缀？false：不跳过
+      #      是否跳过前缀？false：不跳过，默认是true
       strip-prefix: false
   host:
+    #    连接微服务超时的时间 15S
     connect-timeout-millis: 15000
+    #    建立TCP的超时时间 60s
     socket-timeout-millis: 60000
 
 ribbon:
+  #  连接超时的时间15s
   ConnectTimeout: 15000
+  #  读取响应的超时时间15s
   ReadTimeout: 15000
